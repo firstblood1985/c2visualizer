@@ -1,5 +1,4 @@
 package io.github.firstblood1985.c2visualizer.controller;
-
 import io.github.firstblood1985.c2visualizer.common.api.CommonResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
