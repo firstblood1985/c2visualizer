@@ -2,12 +2,8 @@ package io.github.firstblood1985.c2visualizer.domain.user;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * usage of this class: C2User
@@ -18,8 +14,12 @@ import java.time.LocalTime;
 @Entity
 public class C2User extends User {
 
-
+    private static final long serialVersionUID = -8106244235391674064L;
     private String logbookId;
+
+    private String username;
+
+    private String password;
 
     private String fullName;
 
@@ -38,6 +38,8 @@ public class C2User extends User {
     private String weight;
 
     private String memberSince;
+
+    private Boolean synced;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

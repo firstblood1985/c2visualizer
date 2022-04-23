@@ -17,6 +17,8 @@ public class WXUser extends User {
 
     private String openId;
 
+    private String phoneNumber;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)

@@ -1,8 +1,6 @@
-package io.github.firstblood1985.c2visualizer.domain.user;
+package io.github.firstblood1985.c2visualizer.domain.workout;
 
 import io.github.firstblood1985.c2visualizer.domain.BaseModel;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,14 +9,11 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 /**
- * usage of this class: SiteUser
- * created by limin @ 2022/4/18
+ * usage of this class: WorkoutBaseModel
+ * created by limin @ 2022/4/20
  */
-@Getter
-@Setter
 @MappedSuperclass
-public abstract class User extends BaseModel {
-
+public abstract class WorkoutBaseModel extends BaseModel {
     @CreationTimestamp
     @Column(name = "create_time", columnDefinition = "TIMESTAMP")
     protected LocalDateTime createTime;
