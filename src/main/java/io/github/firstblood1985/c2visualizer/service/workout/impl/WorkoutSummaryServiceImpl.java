@@ -75,6 +75,10 @@ public class WorkoutSummaryServiceImpl implements WorkoutSummaryService {
 
     @Override
     public WorkoutStats getWorkoutStatsBySiteUser(SiteUser siteUser, C2Season season) {
+        if(season == C2Season.CurrentSeason)
+        {
+            return getWorkoutStatsBySiteUser(siteUser,season.seasonStart(),LocalDate.now()) ;
+        }
         return getWorkoutStatsBySiteUser(siteUser, season.seasonStart(), season.seasonEnd());
     }
 
@@ -132,21 +136,21 @@ public class WorkoutSummaryServiceImpl implements WorkoutSummaryService {
     public int getWorkoutMeters(SiteUser siteUser, LocalDate start, LocalDate end) {
         List<WorkoutSummary> workoutSummaries = getWorkoutSummaryBySiteUser(siteUser, start, end);
 
-        return workoutSummaries.stream().mapToInt(w -> w.getMeters()).sum();
+        return workoutSummaries.stream().mapToInt(WorkoutSummary::getMeters).sum();
     }
 
     @Override
     public Duration getWorkoutDurations(SiteUser siteUser, LocalDate start, LocalDate end) {
         List<WorkoutSummary> workoutSummaries = getWorkoutSummaryBySiteUser(siteUser, start, end);
 
-        return workoutSummaries.stream().map(WorkoutSummary::getDuration).reduce(Duration.ZERO, (duration, duration2) -> duration.plus(duration2));
+        return workoutSummaries.stream().map(WorkoutSummary::getDuration).reduce(Duration.ZERO, Duration::plus);
     }
 
     @Override
     public int getWorkoutCals(SiteUser siteUser, LocalDate start, LocalDate end) {
         List<WorkoutSummary> workoutSummaries = getWorkoutSummaryBySiteUser(siteUser, start, end);
 
-        return workoutSummaries.stream().mapToInt(w -> w.getCalories()).sum();
+        return workoutSummaries.stream().mapToInt(WorkoutSummary::getCalories).sum();
     }
 
 

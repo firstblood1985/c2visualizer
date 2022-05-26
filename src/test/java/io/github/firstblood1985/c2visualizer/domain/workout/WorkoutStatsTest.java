@@ -54,11 +54,10 @@ public  class WorkoutStatsTest {
 
         Long numberOfDays = workoutStats.numberOfDays();
 
-        Assert.assertEquals(364,numberOfDays.longValue());
+        Assert.assertEquals(365,numberOfDays.longValue());
 
         Assert.assertEquals(4,workoutStats.numberOfWorkouts().longValue());
     }
-
 
 
 }

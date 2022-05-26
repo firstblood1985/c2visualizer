@@ -13,8 +13,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -30,7 +33,7 @@ import static org.mockito.Mockito.when;
  * usage of this class: WorkoutSummaryServiceTest
  * created by limin @ 2022/4/22
  */
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class WorkoutSummaryServiceTest {
 
     @Mock
@@ -121,7 +124,7 @@ public class WorkoutSummaryServiceTest {
     @Test
     public void getWorkoutDurations() {
        Duration duration = workoutSummaryService.getWorkoutDurations(siteUser,start,end);
-       Assert.assertEquals(Duration.ofHours(2),duration);
+       Assert.assertEquals(Duration.ofHours(3).plus(Duration.ofMinutes(25)),duration);
     }
 
     @Test

@@ -14,14 +14,16 @@ public enum C2Season {
     SEASON2022("2022"),
     SEASON2021("2021");
 
-    private String season;
+    public static final C2Season CurrentSeason = C2Season.SEASON2023;
+
+    private final String season;
 
     public LocalDate seasonStart() {
-        return LocalDate.of(Integer.valueOf(season)-1,5,1);
+        return LocalDate.of(Integer.parseInt(season)-1,5,1);
     }
 
     public LocalDate seasonEnd(){
-        return LocalDate.of(Integer.valueOf(season),4,30);
+        return LocalDate.of(Integer.parseInt(season),4,30);
     }
 
     //default season is always the first one
