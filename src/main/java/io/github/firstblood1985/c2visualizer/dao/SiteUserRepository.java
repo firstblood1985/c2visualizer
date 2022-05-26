@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SiteUserRepository extends CrudRepository<SiteUser, Long> {
-    Optional<SiteUser> findByUserName(String userName);
+    SiteUser findByUserName(String userName);
 
     long countByIdNotNull();
 

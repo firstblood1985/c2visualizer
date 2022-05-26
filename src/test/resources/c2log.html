@@ -1,0 +1,913 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Concept2 Logbook | Log</title>
+    <link rel="stylesheet" href="/build/css/application-6408888575.css">
+    <link rel="stylesheet" href="/build/css/vendor-6a49257047.css">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/build/js/jquery.min.js">\x3C/script>')</script>
+    <!-- For development; replace with custom build in production -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+    var DATE_FORMAT = 'mm/dd/yyyy';
+    var DATE_FORMAT_TABLESORT = 'mmddyy';
+    var ROWER = 1;
+    var SKIERG = 4;
+    var SNOW = 7;
+    var ROLLERSKI = 11;
+    var BIKE = 8;
+    var MULTIERG = 12;
+
+    var TYPES = {"1":{"name":"RowErg","short":"RowErg","slug":"rower","exercise":"row","rankable":true},"2":{"name":"RowErg on Slides","short":"Slides","slug":"slides","exercise":"row","rankable":true},"3":{"name":"Dynamic RowErg","short":"Dynamic","slug":"dynamic","exercise":"row","rankable":true},"4":{"name":"SkiErg","short":"SkiErg","slug":"skierg","exercise":"ski","rankable":true},"8":{"name":"BikeErg","short":"BikeErg","slug":"bike","exercise":"bike","rankable":true},"12":{"name":"MultiErg","short":"MultiErg","slug":"multierg","exercise":"multierg","rankable":true,"unloggable":true},"5":{"name":"Paddle Adapter","short":"Paddle","slug":"paddle","exercise":"row","rankable":false},"6":{"name":"On-water","short":"Water","slug":"water","exercise":"row","rankable":false},"7":{"name":"On-snow","short":"Snow","slug":"snow","exercise":"ski","rankable":false},"11":{"name":"Rollerski","short":"Rollerski","slug":"rollerski","exercise":"ski","rankable":false}}
+
+    var LIGHT_BLUE = '#7D9BC1';
+    var DARK_BLUE = '#003A70';
+    var GREEN = '#B7BF10';
+
+    var ADAPTIVE_LTA_AKD = 6
+    var ADAPTIVE_TA = 7
+
+    var RANKING_DISTANCES = [100,500,1000,2000,5000,6000,10000,21097,42195,100000]
+    var RANKING_TIMES = [600,2400,18000,36000]
+    var RANKING_DISTANCES_BIKE = [200,500,1000,4000,10000,20000,40000,100000]
+    var RANKING_TIMES_BIKE = [600,18000,36000]
+
+</script>  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-383575-25', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#c8c9c7"
+      },
+      "button": {
+        "background": "#fff",
+        "text": GREEN
+      }
+    },
+    "position": "bottom",
+    "content": {
+      "href": "/cookies"
+    }
+  })});
+  </script></head>
+<body>
+
+
+<!-- Top Navigation -->
+<div class="container top-nav clearfix">
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="navbar-brand" href="/"><img src="/build/images/logos/concept2/blue.png" width="300" height="45"></a>
+            <!-- Logged In -->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a id="profile_dropdown" data-target="#" class="profile_dropdown" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                        <i class="fa icon-profile"></i> <i class="icon-open-menu"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="profile_dropdown">
+                        <li><a href="/profile/1043029">Profile</a></li>
+                        <li><a href="/profile/1043029/edit">Edit Profile</a></li>
+                        <li><a href="/mail">Mail </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/help">Help</a></li>
+                        <li><a href="/contact">Contact Concept2</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="navbar navbar-blue" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Only shown when extra small -->
+            <button type="button" class="navbar-toggle navbar-button menu" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="icon-menu icon-fw icon-lg"></i> Menu
+            </button>
+            <a class="navbar-brand c2" href="/"><img src="/build/images/logos/c2/white/100.png" width="50" height="44"></a>
+            <button type="button" class="navbar-toggle navbar-button profile" data-toggle="collapse" data-target="#navbar2">
+                <span class="sr-only">Toggle user navigation</span>
+                User
+                <i class="icon-user icon-fw icon-lg"></i>
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 main-nav-col">
+                <!-- Logged In -->
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-main">
+                        <li><a href="/log">Log</a></li>
+                        <li><a href="/history">History</a></li>
+                        <li><a href="/rankings">Rankings</a></li>
+                        <li><a href="/ranked-workouts">Ranked Workouts</a></li>
+                        <li><a href="/challenges">Challenges</a></li>
+                        <li><a href="/team">Teams</a></li>
+                        <li><a href="/partners">Training Partners</a></li>
+                    </ul>
+                </div>
+                <div id="navbar2" class="navbar-collapse navbar-profile collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/profile/1043029">Profile</a></li>
+                        <li><a href="/profile/1043029/edit">Edit Profile</a></li>
+                        <li><a href="/mail">Mail </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/help">Help</a></li>
+                        <li><a href="/contact">Contact Concept2</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container default">
+    <div class="row">
+        <main class="two_column">
+            <section class="sidebar">
+
+                <div class="log-sidebar">
+                    <div class="stats">
+                        <div class="stat ">
+                            <div class="stat__figure">
+                                <span>3,888,525</span>
+                            </div>
+                            <div class="stat__name">
+                                Lifetime Meters
+                            </div>
+                        </div>
+                        <div class="stat ">
+                            <div class="stat__figure">
+                                <span>2,270,139</span>
+                            </div>
+                            <div class="stat__name">
+                                Season Meters
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- This is only shown if viewing your own log, not somebody else's //-->
+
+
+
+                    <h4>Last 30 Days Activity</h4>
+
+                    <div id="last_30_days_time" class="log-chart"></div>
+                    <div id="last_30_days_distance" class="log-chart hidden"></div>
+
+                    <div class="text-center">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-xs btn-default active" id="show_time_last_30">
+                                <input type="radio" name="graph-type" autocomplete="off" checked> Time
+                            </label>
+                            <label class="btn btn-xs btn-default" id="show_distance_last_30">
+                                <input type="radio" name="graph-type" autocomplete="off"> Distance
+                            </label>
+                        </div>
+                    </div>
+
+                    <script>
+$(function() {
+
+  var data = {"2022-03-24":{"day":"2022-03-24","time":"28711","distance":"10996"},"2022-03-25":{"day":"2022-03-25","time":"16767","distance":"6000"},"2022-03-26":{"day":"2022-03-26","time":"36019","distance":"13510"},"2022-03-27":{"day":"2022-03-27","time":"33683","distance":"12915"},"2022-03-28":{"day":"2022-03-28","time":"16841","distance":"6000"},"2022-03-29":{"day":"2022-03-29","time":"34935","distance":"10452"},"2022-03-30":{"day":"2022-03-30","time":"28606","distance":"11013"},"2022-03-31":{"day":"2022-03-31","time":"27866","distance":"10745"},"2022-04-01":{"day":"2022-04-01","time":"31861","distance":"12223"},"2022-04-02":{"day":"2022-04-02","time":"16701","distance":"6000"},"2022-04-03":{"day":"2022-04-03","time":"32416","distance":"12381"},"2022-04-04":{"day":"2022-04-04","time":"28645","distance":"10940"},"2022-04-05":{"day":"2022-04-05","time":"32945","distance":"12493"},"2022-04-06":{"day":"2022-04-06","time":"17072","distance":"6000"},"2022-04-07":{"day":"2022-04-07","time":"16384","distance":"6504"},"2022-04-08":{"day":"2022-04-08","time":"28729","distance":"10910"},"2022-04-09":{"day":"2022-04-09","time":"34152","distance":"12834"},"2022-04-10":{"day":"2022-04-10","time":"32664","distance":"12230"},"2022-04-11":{"day":"2022-04-11","time":"17130","distance":"6000"},"2022-04-12":{"day":"2022-04-12","time":"21825","distance":"6154"},"2022-04-13":{"day":"2022-04-13","time":"31493","distance":"12000"},"2022-04-14":{"day":"2022-04-14","time":"28162","distance":"10602"},"2022-04-16":{"day":"2022-04-16","time":"38828","distance":"14734"},"2022-04-17":{"day":"2022-04-17","time":"38531","distance":"14618"},"2022-04-18":{"day":"2022-04-18","time":"27912","distance":"10631"},"2022-04-19":{"day":"2022-04-19","time":"14176","distance":"5000"},"2022-04-20":{"day":"2022-04-20","time":"17026","distance":"6454"},"2022-04-21":{"day":"2022-04-21","time":"32985","distance":"12391"},"2022-04-22":{"day":"2022-04-22","time":"27324","distance":"10481"}}
+  var time = [];
+  var distance = [];
+  var format = 'YYYY-MM-DD';
+  var settings = {};
+
+  for (i = 1; i <= 30; i++) {
+    var day = moment().subtract(30 - i, 'days');
+    var t = (day.format(format) in data) ? parseInt(data[day.format(format)].time) : 0;
+    var d = (day.format(format) in data) ? parseInt(data[day.format(format)].distance) : 0;
+    time.push([day.valueOf(), t]);
+    distance.push([day.valueOf(), d]);
+  }
+
+  settings.default = {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: ''
+    },
+    credits: {
+      enabled: false
+    },
+    legend: {
+      enabled: false
+    },
+    yAxis: {
+      min: 0,
+      title: ''
+    },
+    xAxis: {
+      labels: {
+        formatter: function() {
+          return moment(this.value).format("DD MMM");                      }
+        },
+      type:'datetime',
+      tickPositioner: function() {
+        var ticks = [
+            moment().subtract(29, 'days').valueOf(),
+            moment().valueOf()
+        ];
+        ticks.info = {
+            unitName: "day", //unitName: "day",
+            higherRanks: {} // Omitting this would break things
+        };
+        return ticks;
+      }
+    },
+    plotOptions: {
+      column: {
+          pointPadding: 0.1,
+          borderWidth: 0,
+      }
+    }
+  }
+
+  settings.time = {
+    chart: {
+        renderTo: 'last_30_days_time',
+    },
+    yAxis: {
+      labels: {
+        formatter: function() {
+          return timeToString(this.value);
+        }
+      },
+      tickInterval: 6000,
+      tickAmount:3,
+    },
+    tooltip: {
+      headerFormat: '',
+      pointFormatter: function() {
+        var day = moment(this.x).format("DD MMM");
+        var time = timeToString(this.y);
+        return '<small>' + day + '</small><br>Time: <b>' + time + '</b>';
+      }
+    },
+    plotOptions: {
+        column: {
+            color: LIGHT_BLUE
+        }
+    },
+    series: [
+      {
+          name: 'Time',
+          data: time
+
+      }
+    ]
+  }
+
+  settings.distance = {
+    chart: {
+        renderTo: 'last_30_days_distance',
+    },
+    tooltip: {
+      headerFormat: '',
+      pointFormatter: function() {
+        var day = moment(this.x).format("DD MMM");
+        return '<small>' + day + '</small><br>Distance: <b>' + this.y + 'm</b>';
+      }
+    },
+    plotOptions: {
+        column: {
+            color: DARK_BLUE
+        }
+    },
+    series: [
+      {
+          name: 'Distance',
+          data: distance
+
+      }
+    ]
+  }
+
+  settings.time = $.extend(true, {}, settings.default, settings.time);
+  settings.distance = $.extend(true, {}, settings.default, settings.distance);
+
+  var chart_time = Highcharts.chart(settings.time);
+  var chart_distance = Highcharts.chart(settings.distance);
+
+  $('#show_time_last_30').click(function () {
+    $('#last_30_days_distance').addClass('hidden');
+    $('#last_30_days_time').removeClass('hidden');
+    chart_time.reflow();
+    Cookies.set('last_30', 'time');
+  });
+
+  $('#show_distance_last_30').click(function () {
+    $('#last_30_days_distance').removeClass('hidden');
+    $('#last_30_days_time').addClass('hidden');
+    chart_distance.reflow();
+    Cookies.set('last_30', 'distance');
+  });
+
+});
+</script>
+
+
+                    <div class="log-challenges">
+                        <h4>Latest Challenges</h4>
+                        <table class="table table-condensed table-striped">
+                            <tr>
+                                <td>Marathon and Century Challenge</td>
+                                <td nowrap>May 1–15</td>
+                            </tr>
+                        </table>
+                        <p><a href="https://log.concept2.com/challenges">View Challenges</a></p>
+                    </div>
+
+                    <div class="log-blog">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Concept2 Blog</h4>
+                                <table class="table table-condensed">
+                                    <tr >
+                                        <td nowrap>
+                                            Mar 28
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/diablo-crossfit-rowd-royalty-founders-embrace-bikeerg" target="_blank">Diablo CrossFit: Row'd Royalty Founders Embrace The BikeErg</a>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td nowrap>
+                                            Mar 18
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/spring-training-strategies" target="_blank">Spring Training Strategies</a>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td nowrap>
+                                            Mar 17
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/oars-spring-to-do-list" target="_blank">Oars: A Spring To-Do List</a>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td nowrap>
+                                            Feb 22
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/rowerg-new-name-model-d-and-model-e" target="_blank">The RowErg: A New Name for the Model D and Model E</a>
+                                        </td>
+                                    </tr>
+                                    <tr  class='hidden-xs' >
+                                        <td nowrap>
+                                            Feb 14
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/tour-de-skierg-challenge-and-olympic-biathlon" target="_blank">Tour de SkiErg Challenge and Olympic Biathlon  </a>
+                                        </td>
+                                    </tr>
+                                    <tr  class='hidden-xs' >
+                                        <td nowrap>
+                                            Feb 11
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/let-it-slide" target="_blank">Let It Slide</a>
+                                        </td>
+                                    </tr>
+                                    <tr  class='hidden-xs' >
+                                        <td nowrap>
+                                            Feb 8
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/mcgrath-plans-to-keep-smashing-records" target="_blank">McGrath Plans to Keep Smashing Records</a>
+                                        </td>
+                                    </tr>
+                                    <tr  class='hidden-xs' >
+                                        <td nowrap>
+                                            Jan 27
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/shipping-tips-to-help-timely-delivery" target="_blank">Shipping Tips to Help with Timely Delivery</a>
+                                        </td>
+                                    </tr>
+                                    <tr  class='hidden-xs' >
+                                        <td nowrap>
+                                            Jan 20
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/biathlon-competition-formats-and-mental-game" target="_blank">Biathlon: Competition Formats and the Mental Game</a>
+                                        </td>
+                                    </tr>
+                                    <tr  class='hidden-xs' >
+                                        <td nowrap>
+                                            Jan 18
+                                        </td>
+                                        <td>
+                                            <a href="https://www.concept2.com/news/wrapping-holiday-challenge-2021" target="_blank">Wrapping Up the Holiday Challenge 2021</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="content">
+
+
+                <h2>Add Workout</h2>
+
+
+                <form method="POST" action="https://log.concept2.com/log" accept-charset="UTF-8" class="js-once"><input name="_token" type="hidden" value="ijKPgZTC5uFEBkILUvfDluxLonP5873jnAnCFLVb">
+
+                    <div class="form-group row">
+                        <label for="date" class="col-sm-3 col-xs-4 control-label">Date</label>
+                        <div class="col-sm-4 col-xs-8">
+                            <div class="input-group date" data-type="date">
+                                <input class="form-control" name="date" type="text" value="04/22/2022" id="date">
+                                <span class="input-group-addon"><i class="icon-calendar icon-fw"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="type" class="col-sm-3 col-xs-4 control-label">Type</label>
+                        <div class="col-sm-4 col-xs-8">
+                            <select class="form-control js-ranking-event" id="type" name="type"><option value="1" selected="selected">RowErg</option><option value="2">RowErg on Slides</option><option value="3">Dynamic RowErg</option><option value="4">SkiErg</option><option value="8">BikeErg</option><option value="5">Paddle Adapter</option><option value="6">On-water</option><option value="7">On-snow</option><option value="11">Rollerski</option></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="distance" class="col-sm-3 col-xs-4 control-label">Distance</label>
+                        <div class="col-sm-4 col-xs-8">
+                            <div class="input-group">
+                                <input pattern="[0-9,]*" min="0" data-type="number" class="form-control distance js-ranking-event" oninvalid="this.setCustomValidity(&#039;Please make sure you only enter numbers here&#039;)" oninput="setCustomValidity(&#039;&#039;)" name="distance" type="text" id="distance">
+                                <div class="input-group-addon">meters</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="hours" class="col-sm-3 hidden-xs control-label">Time</label>
+                        <div class="col-xs-3 col-sm-2" style="max-width: 130px">
+                            <input pattern="[0-9,]*" min="0" data-type="number" class="form-control hours js-ranking-event" placeholder="Hours" name="hours" type="text" id="hours">
+                            <label for="hours" class="control-label visible-xs">Hours</label>
+                        </div>
+                        <div class="col-xs-3 col-sm-2" style="max-width: 130px">
+                            <input pattern="[0-9,]*" min="0" data-type="number" class="form-control minutes js-ranking-event" placeholder="Minutes" name="minutes" type="text">
+                            <label for="hours" class="control-label visible-xs">Minutes</label>
+                        </div>
+                        <div class="col-xs-3 col-sm-2" style="max-width: 130px">
+                            <input pattern="[0-9,]*" min="0" data-type="number" class="form-control seconds js-ranking-event" placeholder="Seconds" maxlength="2" name="seconds" type="text">
+                            <label for="hours" class="control-label visible-xs">Seconds</label>
+                        </div>
+                        <div class="col-xs-3 col-sm-2" style="max-width: 130px">
+                            <input pattern="[0-9,]*" min="0" data-type="number" class="form-control tenths js-ranking-event" placeholder="Tenths" maxlength="1" name="tenths" type="text">
+                            <label for="hours" class="control-label visible-xs">Tenths</label>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="weight_class_row">
+                        <div class='col-sm-3 col-xs-4 control-label'>
+                            <strong>Weight Class</strong>
+                            <i class="icon-help" data-container="body" data-toggle="popover" data-placement="right" data-title="Weight Categories" data-content='Below are the definitions for lightweight and heavyweight for men and women. These weight categories only apply to indoor rowing.<br><br>Lightweight Women: <= 135lbs (61.5kg)<br>Heavyweight Women: > 135 lbs (61.6kg)<br>Lightweight Men <= 165lbs (75kg)<br>Heavyweight Men > 165lbs (75kg)' data-html="true"></i>      </div>
+                        <div class="col-sm-4 col-xs-8">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default active">
+                                    <input checked="checked" name="weight_class" type="radio" value="H">
+                                    Hwt
+                                </label>
+                                <label class="btn btn-default ">
+                                    <input name="weight_class" type="radio" value="L">
+                                    Lwt
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="comments" class="col-sm-3 col-xs-4 control-label">Comments</label>
+                        <div class="col-sm-6 col-xs-8">
+                            <textarea class="form-control" id="comments" rows="3" name="comments" cols="50"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row verification-code-row hidden">
+                        <label class="col-sm-3 col-xs-4 control-label" for="verification_code">Verification Code
+                            <i class="icon-help" data-container="body" data-toggle="popover" data-placement="right" data-title="Verification Code" data-content='If you want to rank this piece, you may want to verify it. Verification is not required to rank a workout. If you use a PM3, PM4 or PM5 monitor you can get a 16-digit verification code from the monitor (<a href="http://www.concept2.com/service/monitors/pm3/how-to-use/viewing-verification-code" target="_blank">instructions here</a>). There is no need to add a code if you do not want to rank your workout.' data-html="true"></i>      </label>
+                        <div class="col-sm-6 col-xs-8">
+                            <input class="form-control verification_code" name="verification_code" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <button type="submit" class="btn btn-default js-change">Submit</button>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="format" data-format="date" value="m/d/Y">
+
+                </form>
+
+                <div class="log-workouts">
+
+                    <div class="log-header">
+
+                        <h2>Latest Workouts</h2>
+
+                        <div class="log-actions">
+                            <div class="log-actions__action">
+                                <a class="btn btn-default btn-sm" href="https://log.concept2.com/season/2022"><i class="icon-table"></i> View Season</a>
+                            </div>
+                            <div class="log-actions__action">
+                                <a class="btn btn-default btn-sm" href="https://log.concept2.com/season/2022/months"><i class="icon-bar-chart"></i> Season Summary</a>
+                            </div>
+                            <div class="log-actions__action">
+                                <a class="btn btn-default btn-sm" href="https://log.concept2.com/history"><i class="icon-archive"></i> All History</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table" id="log-table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Distance</th>
+                            <th>Time</th>
+                            <th class="hidden-xxs">Pace</th>
+                            <th class="hidden-xs">Type</th>
+                            <th class="hidden-xs hidden-md">Weight</th>
+                            <th class="hidden-xxs">Comments</th>
+                            <th>Rank</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td nowrap>04/22/22</td>
+                            <td nowrap>10,000m</td>
+                            <td nowrap>43:17.8</td>
+                            <td nowrap class="hidden-xxs">2:09.8</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                                <form method="POST" action="https://log.concept2.com/log/rank" accept-charset="UTF-8" class="inline"><input name="_token" type="hidden" value="ijKPgZTC5uFEBkILUvfDluxLonP5873jnAnCFLVb"><input type="hidden" name="id" value="63303531"><button class="btn btn-xs btn-default" type="submit"><i class="icon-rank" title="Rank" aria-hidden="true"></i> Rank</button></form>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63303531"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63303531/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/22/22</td>
+                            <td nowrap>481m</td>
+                            <td nowrap>2:14.6</td>
+                            <td nowrap class="hidden-xxs">2:19.9</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63303532"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63303532/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/21/22</td>
+                            <td nowrap>1,500m</td>
+                            <td nowrap>6:50.6</td>
+                            <td nowrap class="hidden-xxs">2:16.8</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63303533"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63303533/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/21/22</td>
+                            <td nowrap>224m</td>
+                            <td nowrap>1:44.9</td>
+                            <td nowrap class="hidden-xxs">3:54.1</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63280804"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63280804/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/21/22</td>
+                            <td nowrap>10,000m</td>
+                            <td nowrap>43:00.3</td>
+                            <td nowrap class="hidden-xxs">2:09.0</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                                <form method="POST" action="https://log.concept2.com/log/rank" accept-charset="UTF-8" class="inline"><input name="_token" type="hidden" value="ijKPgZTC5uFEBkILUvfDluxLonP5873jnAnCFLVb"><input type="hidden" name="id" value="63280805"><button class="btn btn-xs btn-default" type="submit"><i class="icon-rank" title="Rank" aria-hidden="true"></i> Rank</button></form>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63280805"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63280805/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/21/22</td>
+                            <td nowrap>667m</td>
+                            <td nowrap>3:22.7</td>
+                            <td nowrap class="hidden-xxs">2:31.9</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63280806"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63280806/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/20/22</td>
+                            <td nowrap>171m</td>
+                            <td nowrap>1:25.8</td>
+                            <td nowrap class="hidden-xxs">4:10.8</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63280807"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63280807/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/20/22</td>
+                            <td nowrap>426m</td>
+                            <td nowrap>3:04.5</td>
+                            <td nowrap class="hidden-xxs">3:36.5</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63258940"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63258940/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/20/22</td>
+                            <td nowrap>5,000m</td>
+                            <td nowrap>19:56.2</td>
+                            <td nowrap class="hidden-xxs">1:59.6</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                                <form method="POST" action="https://log.concept2.com/log/rank" accept-charset="UTF-8" class="inline"><input name="_token" type="hidden" value="ijKPgZTC5uFEBkILUvfDluxLonP5873jnAnCFLVb"><input type="hidden" name="id" value="63258941"><button class="btn btn-xs btn-default" type="submit"><i class="icon-rank" title="Rank" aria-hidden="true"></i> Rank</button></form>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63258941"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63258941/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap>04/20/22</td>
+                            <td nowrap>857m</td>
+                            <td nowrap>3:56.1</td>
+                            <td nowrap class="hidden-xxs">2:17.7</td>
+                            <td nowrap class="hidden-xs">RowErg</td>
+                            <td nowrap class="hidden-xs hidden-md">Hwt</td>
+                            <td class="comments hidden-xxs"></td>
+                            <td>
+                            </td>
+                            <td class="text-center">
+                                <a href="https://log.concept2.com/profile/1043029/log/63258942"><i class="icon-view" title="View" aria-hidden="true"></i><span class="sr-only">View workout</span></a>
+                            </td>
+                            <td class="text-center hidden-xxs">
+                                <a href="https://log.concept2.com/profile/1043029/log/63258942/edit"><i class="icon-edit" title="Edit" aria-hidden="true"></i><span class="sr-only">Edit workout</span></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+<footer class="footer">
+    <section class="footer__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-sm-4">
+                    <h2>Quick Links</h2>
+                    <ul class="footer-links">
+                        <li><a href="/log">Your Log</a></li>
+                        <li><a href="/rankings">Rankings</a></li>
+                        <li><a href="/blog">Logbook Blog</a></li>
+                        <li><a href="/affiliation/standings">Affiliation Standings</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <h2>Help</h2>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="/help">FAQs</a></li>
+                        <li><a href="http://www.c2forum.com" rel="external">Forum</a></li>
+                        <li><a href="http://www.concept2.com/indoor-rowers/training/calculators/pace-calculator" rel="external">Pace Calculator</a></li>
+                        <li><a href="http://www.concept2.com/news" rel="external">Concept2 News</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <h2>Concept2</h2>
+                    <p>Making world class rowing products since 1976.</p>
+                    <a href="http://www.concept2.com" rel="external"><i class="icon-web icon-fw icon-lg"></i> concept2.com</a>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/concept2inc" class="facebook social-icon dark js-social-link" data-network="Facebook" rel="external">
+                            <span class="sr-only">Facebook</span>
+                            <i class="icon-facebook icon-fw icon-lg"></i>
+                        </a>
+                        <a href="https://twitter.com/concept2" class="social-icon dark twitter js-social-link" data-network="Twitter" rel="external">
+                            <span class="sr-only">Twitter</span>
+                            <i class="icon-twitter icon-fw icon-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/concept2inc" class="social-icon dark instagram js-social-link" data-network="Instagram" rel="external">
+                            <span class="sr-only">Instagram</span><i class="icon-instagram icon-fw icon-lg"></i>
+                        </a>
+                        <a href="https://www.pinterest.com/concept2" class="social-icon dark pinterest js-social-link" data-network="Pinterest" rel="external">
+                            <span class="sr-only">Pinterest</span><i class="icon-pinterest icon-fw icon-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="footer__middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Workout of the Day</h2>
+                    <form class="form-inline wod-signup">
+                        <p class="wod-text"></p>
+                        <div class="form-group">
+                            <input type="email" class="form-control wod-email wod-input" placeholder="Email Address">
+                            <button type="submit" class="btn btn-default wod-submit wod-input">Sign up</button>
+                            <br>
+                            <label class="normal"><input type="radio" name="wod-type" value="rower" checked class="form-control wod-radio wod-input"> RowErg <a href="http://www.concept2.com/indoor-rowers/training/wod" rel="external">(View WOD)</a></label>
+                            <label class="normal"><input type="radio" name="wod-type" value="skierg" class="form-control wod-radio wod-input"> SkiErg <a href="http://www.concept2.com/skierg/training/wod" rel="external">(View WOD)</a></label>
+                            <label class="normal"><input type="radio" name="wod-type" value="bikeerg" class="form-control wod-radio wod-input"> BikeErg <a href="http://www.concept2.com/bikeerg/training/wod" rel="external">(View WOD)</a></label>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-4 col-sm-offset-2">
+                    <h2>ErgData</h2>
+                    <a href="https://itunes.apple.com/gb/app/ergdata/id561716382?mt=8" rel="external" class="social-icon">
+                        <span class="sr-only">ErgData for iOS</span>
+                        <i class="icon-apple icon-fw icon-lg"></i>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.concept2.ergdata" rel="external" class="social-icon android">
+                        <span class="sr-only">ErgData for Android</span>
+                        <i class="icon-android icon-fw icon-lg"></i>
+                    </a>
+                    <a href="http://www.concept2.com/ergdata" rel="external">
+                        <img src="/build/images/layout/ergdata.png" width="100">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="footer__bottom">
+        <div class="container">
+            © Concept2 Inc. All rights reserved. <a href="http://www.concept2.com/company/internet-policies/privacy" rel="external">Privacy Policy</a>. <a href="/terms">Terms and Conditions</a>. <a href="/cookies">Cookie Policy</a>.
+        </div>
+    </section>
+</footer>
+<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bundled JS -->
+<script src="/build/js/vendor-16ed5c0124.js"></script>
+<script src="/build/js/application-73a05f0e6e.js"></script>
+
+<script>
+    if (window.innerWidth < 768) {
+      $('input').attr('placeholder', '');
+    }
+
+   display_verification_code($('#type').val());
+    $(function(){
+      mask_verification_code();
+      $('.js-ranking-event').on('change', function() {
+        var type = $('#type').val();
+        display_verification_code(type);
+      });
+
+      // bind change event to select
+      $('#type').on('change', function () {
+        var type = $(this).val(); // get selected value
+        hide_weight(type);
+      });
+      autosize($('#comments'));
+      $(window).resize(function(){
+        if (window.innerWidth < 768) {
+          $('input').attr('placeholder', '');
+        } else {
+          $('input[name="hours"]').attr('placeholder', 'Hours');
+          $('input[name="minutes"]').attr('placeholder', 'Minutes');
+          $('input[name="seconds"]').attr('placeholder', 'Seconds');
+          $('input[name="tenths"]').attr('placeholder', 'Tenths');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

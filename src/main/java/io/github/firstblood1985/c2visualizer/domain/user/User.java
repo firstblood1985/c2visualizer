@@ -21,9 +21,11 @@ public abstract class User extends BaseModel {
 
     @CreationTimestamp
     @Column(name = "create_time", columnDefinition = "TIMESTAMP")
-    public LocalDateTime createTime;
+    protected LocalDateTime createTime;
 
     @UpdateTimestamp
     @Column(name = "update_time", columnDefinition = "TIMESTAMP")
-    public LocalDateTime updateTime;
+    protected LocalDateTime updateTime;
+
+    public abstract String getPrefix();
 }

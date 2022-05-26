@@ -13,13 +13,17 @@ import javax.persistence.*;
 @Setter
 @Entity
 public class WXUser extends User {
-
-
     private String openId;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+
+    @Override
+    public String getPrefix() {
+        return "WXUser";
+    }
 
 }
