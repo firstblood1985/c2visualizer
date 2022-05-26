@@ -1,0 +1,57 @@
+package io.github.firstblood1985.c2visualizer.config;
+
+import io.github.firstblood1985.c2visualizer.domain.user.SiteUser;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+
+/**
+ * usage of this class: SiteUserUserDetails
+ * created by limin @ 2022/5/1
+ */
+@Getter
+@Setter
+@AllArgsConstructor
+public class SiteUserUserDetails implements UserDetails {
+    private SiteUser siteUser;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return siteUser.getUserName();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+}
