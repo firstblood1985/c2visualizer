@@ -42,9 +42,13 @@ public class C2User extends User {
     private Boolean synced;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
 
+    @Override
+    public String getPrefix() {
+        return "C2User";
+    }
 }

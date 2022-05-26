@@ -26,4 +26,6 @@ public abstract class User extends BaseModel {
     @UpdateTimestamp
     @Column(name = "update_time", columnDefinition = "TIMESTAMP")
     protected LocalDateTime updateTime;
+
+    public abstract String getPrefix();
 }

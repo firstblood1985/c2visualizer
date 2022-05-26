@@ -15,4 +15,10 @@ public interface SiteUserService {
     SiteUser connectSiteUserWithWXUser(SiteUser siteUser, WXUser wxUser);
 
     SiteUser connectSiteUserWithC2User(SiteUser siteUser, C2User c2User);
+
+    SiteUser findSiteUserByUsername(String username);
+
+    SiteUser findSiteUserByWXUser(WXUser wxUser);
+
+    String loginWithWXUser(WXUser wxUser);
 }

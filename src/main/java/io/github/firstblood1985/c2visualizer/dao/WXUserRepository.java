@@ -8,4 +8,5 @@ import org.springframework.data.repository.CrudRepository;
  * created by limin @ 2022/4/22
  */
 public interface WXUserRepository extends CrudRepository<WXUser,Long> {
+    WXUser findByOpenId(String openId);
 }

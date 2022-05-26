@@ -8,6 +8,6 @@ import org.springframework.data.repository.CrudRepository;
  * created by limin @ 2022/4/22
  */
 public interface C2UserRepository extends CrudRepository<C2User,Long> {
-
+    C2User findByUsernameIgnoreCase(String username);
 
 }

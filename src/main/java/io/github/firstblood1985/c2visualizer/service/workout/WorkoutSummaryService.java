@@ -1,9 +1,11 @@
 package io.github.firstblood1985.c2visualizer.service.workout;
 
 import io.github.firstblood1985.c2visualizer.domain.user.SiteUser;
-import io.github.firstblood1985.c2visualizer.domain.workout.Season;
+import io.github.firstblood1985.c2visualizer.domain.workout.C2Season;
+import io.github.firstblood1985.c2visualizer.domain.workout.WorkoutStats;
 import io.github.firstblood1985.c2visualizer.domain.workout.WorkoutSummary;
 import io.github.firstblood1985.c2visualizer.domain.workout.WorkoutSummaryFilter;
+import org.springframework.data.domain.Pageable;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -16,11 +18,16 @@ import java.util.Map;
  */
 public interface WorkoutSummaryService {
 
-    List<WorkoutSummary> getWorkoutSummaryBySiteUser(SiteUser siteUser);
 
-    List<WorkoutSummary> getWorkoutSummaryBySiteUser(SiteUser siteUser,Season season);
+    WorkoutSummary getWorkoutSummaryWithDetails(SiteUser siteUser, String logId);
 
-    List<WorkoutSummary> getWorkoutSummaryBySiteUser(SiteUser siteUser, LocalDate start, LocalDate end);
+    List<WorkoutStats> getWorkoutStatsBySiteUserPerDay(SiteUser siteUser, LocalDate start,LocalDate end);
+
+    WorkoutStats getWorkoutStatsBySiteUser(SiteUser siteUser, LocalDate start, LocalDate end);
+
+    WorkoutStats getWorkoutStatsBySiteUser(SiteUser siteUser, C2Season season);
+
+    List<WorkoutSummary> getWorkoutSummaryBySiteUser(SiteUser siteUser, LocalDate start, LocalDate end, Pageable pageable);
 
     Map<LocalDate,Long> getWorkoutCountPerDay(SiteUser siteUser, LocalDate start,LocalDate end);
 
@@ -33,4 +40,9 @@ public interface WorkoutSummaryService {
     Duration getWorkoutDurations(SiteUser siteUser, LocalDate start, LocalDate end);
 
     int getWorkoutCals(SiteUser siteUser,LocalDate start, LocalDate end);
+
+
+    default List<WorkoutSummary> getWorkoutSummaryBySiteUser(SiteUser siteUser, LocalDate start, LocalDate end){
+        return getWorkoutSummaryBySiteUser(siteUser,start,end,Pageable.unpaged());
+    }
 }

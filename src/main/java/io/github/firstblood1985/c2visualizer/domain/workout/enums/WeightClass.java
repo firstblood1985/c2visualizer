@@ -6,7 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum WeightClass implements Convertable {
-    HEAVY_WEIGHT("Hwt");
+    HEAVY_WEIGHT("Hwt"),
+    LIGHT_WEIGHT("Lwt");
 
     private String weightClass;
 

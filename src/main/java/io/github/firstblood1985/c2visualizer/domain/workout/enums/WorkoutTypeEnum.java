@@ -7,7 +7,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum WorkoutTypeEnum implements Convertable {
 
-    FIXED_DISTANCE("Fixed Distance");
+    FIXED_DISTANCE("Fixed Distance"),
+
+    FIXED_TIME("Fixed Time"),
+
+    JUST_ROW("Just Row"),
+
+    INTERVAL_TIME("Interval:Time"),
+
+    INTERVAL_DISTANCE("Interval:Distance");
 
     private String workoutType;
 

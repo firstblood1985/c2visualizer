@@ -5,14 +5,14 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum Verified implements Convertable {
+public enum YESNOEnum implements Convertable{
+    NO("No"),
     YES("Yes"),
-    NO("No");
+    NULL("NULL");
 
-    private String verified;
-
+    private String result;
     @Override
     public String getCode() {
-       return verified;
+        return result;
     }
 }

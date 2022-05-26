@@ -1,8 +1,8 @@
 package io.github.firstblood1985.c2visualizer.controller;
 import io.github.firstblood1985.c2visualizer.common.api.CommonResult;
+import io.github.firstblood1985.c2visualizer.common.util.Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +21,8 @@ public class HelloController {
     @RequestMapping(value = "hello",method = RequestMethod.GET)
     @ResponseBody
     public CommonResult hello() {
-        return CommonResult.success(null, "Hello from C2Visualizer");
+        String username = Utils.getCurrentSiteUsername();
+
+        return CommonResult.success(null, String.format("Hello %s from C2Visualizer",username));
     }
 }

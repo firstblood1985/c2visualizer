@@ -14,7 +14,6 @@ import javax.persistence.*;
 @Entity
 public class SiteUser extends User {
 
-
     @OneToOne
     @JoinColumn(name = "c_2_user_ID")
     private C2User c2User;
@@ -26,8 +25,12 @@ public class SiteUser extends User {
     private String userName;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Override
+    public String getPrefix() {
+        return "SiteUser";
+    }
 }

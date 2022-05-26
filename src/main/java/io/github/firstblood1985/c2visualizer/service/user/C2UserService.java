@@ -17,4 +17,6 @@ public interface C2UserService {
      * for test connection with C2 site
      * */
     Boolean authenticateC2User(C2UserParam c2UserParam);
+
+    C2User updateC2User(C2User c2User, C2UserParam c2UserParam);
 }

@@ -1,5 +1,7 @@
 package io.github.firstblood1985.c2visualizer.domain.workout.enums;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class C2Converter implements AttributeConverter<Convertable, String> {
         convertables.addAll(Arrays.asList(WorkOutEnum.values()));
         convertables.addAll(Arrays.asList(WeightClass.values()));
         convertables.addAll(Arrays.asList(WorkoutTypeEnum.values()));
+        convertables.addAll(Arrays.asList(YESNOEnum.values()));
     }
 
     @Override
@@ -32,10 +35,14 @@ public class C2Converter implements AttributeConverter<Convertable, String> {
 
     @Override
     public Convertable convertToEntityAttribute(String s) {
+        if(StringUtils.isEmpty(s) || StringUtils.equals("NULL",s))
+            return null;
+
         Optional<Convertable> r = convertables.stream().map(c -> c.of(s)).filter(m->m!=null).findAny();
         if(r.isPresent())
             return r.get();
         else
+            System.out.println("debug: "+s);
             throw new IllegalArgumentException();
     }
 

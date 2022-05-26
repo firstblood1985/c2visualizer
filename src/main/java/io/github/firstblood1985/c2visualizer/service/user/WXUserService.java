@@ -1,5 +1,6 @@
 package io.github.firstblood1985.c2visualizer.service.user;
 
+import io.github.firstblood1985.c2visualizer.domain.user.SiteUser;
 import io.github.firstblood1985.c2visualizer.domain.user.WXUser;
 import io.github.firstblood1985.c2visualizer.domain.user.dto.WXUserParam;
 
@@ -10,4 +11,5 @@ import io.github.firstblood1985.c2visualizer.domain.user.dto.WXUserParam;
 public interface WXUserService {
     WXUser createWXUser(WXUserParam wxUserParam);
 
+    WXUser findWXUserByOpenId(String openId);
 }
