@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
  * created by limin @ 2022/5/12
  */
 @Data
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class WorkoutSummaryDTO {
     private LocalDate date;
     private String meters;
@@ -46,7 +45,7 @@ public class WorkoutSummaryDTO {
         duration = Utils.durationToString(workoutSummary.getDuration());
         logId = workoutSummary.getLogId();
         workout = workoutSummary.getWorkOut().getCode();
-        workoutType  = workoutSummary.getWorkoutType().getCode();
+        workoutType  = workoutSummary.getWorkoutType()==null?"Unknown":workoutSummary.getWorkoutType().getCode();
 
         calories = workoutSummary.getCalories();
         averageHeartRate = workoutSummary.getAverageHeartRate();
